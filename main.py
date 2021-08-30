@@ -60,7 +60,7 @@ def get_shop_list_by_dishes(dish_lst, persons):
 
     print(ingredients)
 
-
+print(dishes)
 get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2)
 get_shop_list_by_dishes(['Утка по-пекински', 'Запеченный картофель' ], 12)
 
