@@ -1,17 +1,13 @@
 import requests
 
 dishes = {}
+dish_list = []
 
-with open('data.txt', 'r', encoding='utf-8') as data_file:
+with open('data.txt', 'r', encoding = 'utf-8') as data_file:
     strings_from_file = data_file.readlines()
-    # print(strings_from_file)
+
 
     strings_cutted = [s[:-1] for s in strings_from_file]
-
-    # strings_cutted = []
-    # for s in strings_from_file:
-    #     strings_cutted.append(s[:-1])
-    # print(strings_cutted)
 
     list_of_elements = []
     element = []
@@ -21,11 +17,10 @@ with open('data.txt', 'r', encoding='utf-8') as data_file:
             list_of_elements.append(element)
             element = []
         else:
-            # print(s)
             element.append(s)
 
     list_of_elements.append(element)
-    # print(list_of_elements)
+
 
     for element in list_of_elements:
         dish = {element[0]: []}
@@ -39,25 +34,18 @@ with open('data.txt', 'r', encoding='utf-8') as data_file:
             position += 1
             count -= 1
         dishes[element[0]] = dish[element[0]]
-        # print(dish)
 
 
-# print(dishes)
+dish_list = list(dishes.keys())
 
+def get_shop_list_by_dishes(dish_lst, persons):
+    ingredients = {}
 
-def get_shop_list_by_dishes(dishes, persons):
-    ingredients = {
-        # 'ingredient_name':
-        #     {
-        #         'quantity': 123,
-        #         'measure': 'pts'
-        #     }
-    }
+    for dish in dish_lst:
 
-    for dish in dishes.values():
-        # ...
-        # print(dish)
-        for ingredient in dish:
+        dish_ingredients = dishes[dish]
+
+        for ingredient in dish_ingredients:
             if ingredient['ingredient_name'] in ingredients:
                 ingredients[ingredient['ingredient_name']]['quantity'] += ingredient['quantity']
             else:
@@ -70,17 +58,10 @@ def get_shop_list_by_dishes(dishes, persons):
     for ingredient in ingredients:
         ingredients[ingredient]['quantity'] = ingredients[ingredient]['quantity'] * persons
 
-        # for ingredient in dish:
-        #     if ingredients[ingredient['ingredient_name']]:
-        #
-        #         ingredient['quantity'] *= persons
-        #         ingredients[ingredient['ingredient_name']['quantity']] = ingredient['quantity']
-
     print(ingredients)
 
 
-get_shop_list_by_dishes(dishes, 2)
-get_shop_list_by_dishes(dishes, 12)
-
+get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2)
+get_shop_list_by_dishes(['Утка по-пекински', 'Запеченный картофель' ], 12)
 
 
